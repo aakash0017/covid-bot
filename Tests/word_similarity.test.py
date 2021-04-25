@@ -1,3 +1,1 @@
-import sys
-sys.path.append('../')
-import utility
+from utility import word_similarity

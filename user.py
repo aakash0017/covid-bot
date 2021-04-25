@@ -1,4 +1,4 @@
-
+import numpy as np
 
 class user:
 
@@ -16,12 +16,41 @@ class user:
         self.state = None
         self.city = None
 
-        # helper's resources
-        
+        # list of resources
+        self.resource = []
 
-        def provide_Resources(self):
-            self.helper = True
+        # load resource list saved under data/ directory
+        self.load_res()
+        # initialize resource dict
+        self.create_res_dict()
 
-        def need_help(self):
-            self.aid = True
+    def resource_provider(self):
+        self.helper = True
 
+    def help_required(self):
+        self.aid = True
+
+    def load_res(self):
+        self.resource = list(np.load('data/res.npy', allow_pickle=True))
+
+    def create_res_dict(self):
+        # list of zeros of same lenght as of resources
+        indicator = [0] * len(self.resource)
+        self.res_dict = dict(zip(self.resource, indicator))
+
+    def get_details(self):
+        details = [self.name, self.email_Id, self.mobile, self.helper, self.aid]
+        return details
+
+    def mapping(self):
+        res_available = []
+        for key, value in self.res_dict():
+            if value == 1:
+                res_available.append(key)
+
+if __name__ == "__main__":
+    
+    user1 = user('nidhir', 'nid989@nid.com', '123456789')
+    user1.resource_provider()
+    lst, res, x = user1.get_details()
+    print(x)
