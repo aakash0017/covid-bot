@@ -16,4 +16,4 @@ def example():
     dict_ = dict(zip(list_, [0]*len(list_)))
     return update_dict(dict_, 'Oximeter')
 
-# print(example())
+print(example())
