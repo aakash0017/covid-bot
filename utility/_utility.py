@@ -1,7 +1,6 @@
 import numpy as np
 import enchant
 
-
 def take_input(user_input, input_type):
     user_input = user_input.lower()
     # handle input_type = 'int'

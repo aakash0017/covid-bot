@@ -1,4 +1,5 @@
 import numpy as np
+import re
 
 # load files from data directory
 def load_file(file_path):
@@ -16,4 +17,19 @@ def example():
     dict_ = dict(zip(list_, [0]*len(list_)))
     return update_dict(dict_, 'Oximeter')
 
-print(example())
+def validate_email(email):
+    regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
+    if re.search(regex, email):
+        return True
+    else:
+        return False
+
+def validate_mobile(mobile):
+    Pattern = re.compile("(0/91)?[7-9][0-9]{9}")
+    if (Pattern.match(mobile)):
+        return True   
+    else :
+        return False
+
+# print(validate_email('nidbhavsar989@gmail.com'))
+# print(validate_mobile('8160790964'))

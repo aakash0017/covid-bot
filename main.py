@@ -7,16 +7,23 @@ from user_utility import user_utility
 def main():
 
     while True:
-        name, email, mobile, city, state, resource = input('name: '), input(
-            'email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
+        name, email, mobile, city, state = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: ')
+        resource = []
+        while True: 
+            inp = input('Resource available: ')
+            resource.append(inp)
+            if inp == 'none':
+                break
         user1 = user(name, email, mobile)
         user1.resource_provider()
         lst, res, x = user1.get_details()
         print(lst)
         # check city validity
         result_city = _utility.take_input(city, 'city')
-        # check resource validity
-        result_res = _utility.take_input(resource, 'res')
+        for i in resource:
+            # check resource validity
+            result_res = _utility.take_input(i, 'res')
+            user1.update_attributes('resources', result_res)
         # check state validity
         result_state = _utility.take_input(state, 'state')
         user1.update_attributes('state', result_state)
