@@ -65,8 +65,15 @@ class user:
 
 if __name__ == "__main__":
     
+    # load idx -> resource mapping
+    idx_2_res_map = _utility.idx_2_res()
+    for key, value in idx_2_res_map.items():
+        print(key, ':', value)
 
-    name, email, mobile, city, state, resource = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
+    # input from user
+    res_ids = '1 2 3'
+
+    name, email, mobile, city, state, res_id = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
     if user_utility.validate_mobile(mobile) and user_utility.validate_email(email):
         user1 = user(name, email, mobile)
         user1.resource_provider()
@@ -75,12 +82,20 @@ if __name__ == "__main__":
         # check city validity
         result_city = _utility.take_input(city, 'city')
         # check resource validity
-        result_res = _utility.take_input(resource, 'res')
+        # result_res = _utility.take_input(resource, 'res')
+        
+        # convert res_id => resources
+        res_ids = _utility.res_spliter(res_ids)
+        Lambda_res = lambda x: idx_2_res_map[int(x)]
+        resources = [Lambda_res(res_id) for res_id in res_ids]
+        for res in resources:
+            user1.update_attributes('resources', res)
+    
         # check state validity
         result_state = _utility.take_input(state, 'state')
         user1.update_attributes('state', result_state)
         user1.update_attributes('city', result_city)
-        user1.update_attributes('resources', result_res)
+        # user1.update_attributes('resources', result_res)
         lst, res, x = user1.get_details()
-        print(lst, res)
+        print(lst, x)
     
