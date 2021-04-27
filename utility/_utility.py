@@ -58,9 +58,9 @@ def most_similar(user_input, input_type):
 
 
 def load_cities():
-    return np.load('../data/cities.npy', allow_pickle=True)
+    return np.load('data/cities.npy', allow_pickle=True)
 
 def load_resources():
-    return np.load('../data/res.npy', allow_pickle=True)
+    return np.load('data/res.npy', allow_pickle=True)
 
 print(take_input('res'))
