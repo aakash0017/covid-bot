@@ -13,8 +13,8 @@ def check_validity(user_input, input_type):
 
     sim_input, status = most_similar(user_input, input_type)
     if status == True:
-        possible_inputs = handle_invalid_input(user_input, input_type)
-        return [status, possible_inputs]
+        # possible_inputs = handle_invalid_input(user_input, input_type)
+        return [status, '']
     else:
         return sim_input
 
@@ -75,4 +75,21 @@ def load_resources():
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
-# print(take_input('kaharswd' ,'state'))
+
+def read_user_input(user_input):
+
+    l = user_input.split('\n')
+    name = l[0]
+    email = l[1]
+    mobile = l[2]
+    city = l[3]
+    state = l[4]
+    resources = l[5]
+    description = l[6]
+
+    return name, email, mobile, city, state, resources, description
+
+# sample_input = 'aakash bhatnagar\nakashbharat.bhatnagar@gmail.com\n8384041898\nvaodara\ndelhi\nplasma AB+\ndescription'
+# print(read_user_input(sample_input))
+
+print(check_validity('wdadwqe', 'city'))
