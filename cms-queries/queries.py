@@ -16,3 +16,4 @@ def post_request(endpoint, body, environment  = 'local', url = 'http://localhost
     res = requests.post(url, data = body, headers = {"Authorization": f"Bearer {aakash_jwt}"} )
     return res.json()
 
+

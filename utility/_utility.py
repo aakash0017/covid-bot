@@ -8,6 +8,7 @@ def take_input(user_input, input_type):
     processed_input = check_validity(user_input, input_type)
     return processed_input
 
+
 def check_validity(user_input, input_type):
 
     sim_input, status = most_similar(user_input, input_type)
@@ -17,7 +18,9 @@ def check_validity(user_input, input_type):
     else:
         return sim_input
 
-# universal invalid user input handler 
+# universal invalid user input handler
+
+
 def handle_invalid_input(user_input, input_type):
     k = 5
     if input_type == 'city':
@@ -37,6 +40,8 @@ def handle_invalid_input(user_input, input_type):
     return list(possible_inputs)
 
 # universal similarity checker for both city and resource input type
+
+
 def most_similar(user_input, input_type):
     if input_type == 'city':
         objective = load_cities()
@@ -60,12 +65,14 @@ def most_similar(user_input, input_type):
 
 
 def load_cities():
-    return np.load('../data/cities.npy', allow_pickle=True)
+    return np.load('data/cities.npy', allow_pickle=True)
+
 
 def load_resources():
-    return np.load('../data/res.npy', allow_pickle=True)
+    return np.load('data/res.npy', allow_pickle=True)
+
 
 def load_states():
-    return np.load('../data/states.npy', allow_pickle=True)
+    return np.load('data/states.npy', allow_pickle=True)
 
-print(take_input('kaharswd' ,'state'))
+# print(take_input('kaharswd' ,'state'))
