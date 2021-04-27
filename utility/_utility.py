@@ -2,9 +2,7 @@ import numpy as np
 import enchant
 
 
-def take_input(input_type):
-    # temporary user_input
-    user_input = 'Oximater'
+def take_input(user_input, input_type):
     user_input = user_input.lower()
     # handle input_type = 'int'
     processed_input = check_validity(user_input, input_type)
@@ -26,6 +24,8 @@ def handle_invalid_input(user_input, input_type):
         objective = load_cities()
     elif input_type == 'res':
         objective = load_resources()
+    elif input_type == 'state':
+        objective = load_states()
     scores = []
     # calculate distance for all cities
     for content in objective:
@@ -42,6 +42,8 @@ def most_similar(user_input, input_type):
         objective = load_cities()
     elif input_type == 'res':
         objective = load_resources()
+    elif input_type == 'state':
+        objective = load_states()
     status = False
     scores = []
     # calculate score b/w contents in objective list and user_input
@@ -58,9 +60,12 @@ def most_similar(user_input, input_type):
 
 
 def load_cities():
-    return np.load('data/cities.npy', allow_pickle=True)
+    return np.load('../data/cities.npy', allow_pickle=True)
 
 def load_resources():
-    return np.load('data/res.npy', allow_pickle=True)
+    return np.load('../data/res.npy', allow_pickle=True)
 
-print(take_input('res'))
+def load_states():
+    return np.load('../data/states.npy', allow_pickle=True)
+
+print(take_input('kaharswd' ,'state'))
