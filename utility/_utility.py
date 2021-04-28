@@ -3,6 +3,7 @@ import enchant
 import sys
 sys.path.append('../')
 from data.default_dict import default_dict
+from data.res_list import res_list
 
 def take_input(user_input, input_type):
     user_input = user_input.lower()
@@ -73,12 +74,9 @@ def load_resources():
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
-def load_defdict():
-    return np.load('../data/default_dict.npy', allow_pickle=True)
-
 # load resources and apply mapping from idx -> resource names
 def idx_2_res():
-    res = list(load_resources())
+    res = res_list()
     idx_2_res = dict()
     for idx, res in enumerate(res):
         idx_2_res[idx] = res
@@ -105,9 +103,8 @@ def read_user_input(user_input):
 def generate_dict(detail_list):
     dict_ = default_dict()
     for idx, i in enumerate(dict_):
-        print(i)
         dict_[i] = detail_list[idx]
     return dict_
 
-lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
-print(generate_dict(lis))
+# lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
+# print(generate_dict(lis))

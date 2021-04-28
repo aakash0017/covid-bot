@@ -28,7 +28,6 @@ def validate_mobile(mobile):
 
 def plasma_handler(res_dict, blood_grps, user_input):
     grps = user_input.split(' ')
-    print(grps)
     for bg in grps:
         if res_dict['Plasma'] == 1:
             blood_grps.append(bg.lower())
@@ -50,8 +49,8 @@ def concat_grps(res_list, blood_grps):
     # concat blood grps to string 
     return [res_list.append(string.format(bg)) for bg in blood_grps]
 
-def example():
-    list_ = list(load_file('../data/res.npy'))
-    dict_ = dict(zip(list_, [0]*len(list_)))
-    update_dict(dict_, 'Plasma')
-    return plasma_handler(dict_, 'AB')
+# def example():
+#     list_ = list(load_file('../data/res.npy'))
+#     dict_ = dict(zip(list_, [0]*len(list_)))
+#     update_dict(dict_, 'Plasma')
+#     return plasma_handler(dict_, 'AB')
