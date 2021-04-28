@@ -52,15 +52,11 @@ class user:
         self.res_dict = dict(zip(self.resource, indicator))
 
     def get_details(self):
-        details = [self.name, self.email_Id, self.mobile, self.helper, self.aid, self.state, self.city]
-        return details,self.resource, self.res_dict, self.blood_grps
+        self.factor_res()
+        details = [self.name, self.email_Id, self.mobile, self.user_res, self.city, self.state]
+        return details
 
-    def mapping(self):
-        res_available = []
-        for key, value in self.res_dict():
-            if value == 1:
-                res_available.append(key)
-                
+    # update user attributes             
     def update_attributes(self, token, update_key):
         if token == 'state':
             self.state = update_key
@@ -70,13 +66,13 @@ class user:
             self.res_dict =  user_utility.update_dict(self.res_dict, update_key)
         elif token == 'blood_grp':
             self.blood_grps = user_utility.plasma_handler(self.res_dict, self.blood_grps, update_key)
-
+            
+    # update user resource list based on mentioned resources.
     def factor_res(self):
         self.user_res = user_utility.user_res(self.res_dict)
         if user_utility.check_plasma(self.user_res):
             # concate blood groups
             user_utility.concat_grps(self.user_res, self.blood_grps)
-        return self.user_res
 
 if __name__ == "__main__":
     
@@ -117,8 +113,5 @@ if __name__ == "__main__":
         user1.update_attributes('state', result_state)
         user1.update_attributes('city', result_city)
         # user1.update_attributes('resources', result_res)
-        lst, res, x, bgs = user1.get_details()
-        print(lst)
-        print(x)
-        print(bgs)
-        print(user1.factor_res())
+        details = user1.get_details()
+        print(details)
