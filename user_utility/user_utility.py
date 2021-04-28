@@ -12,11 +12,6 @@ def update_dict(res_dict, update_key):
             res_dict[key] = 1
     return res_dict 
 
-def example():
-    list_ = list(load_file('data/res.npy'))
-    dict_ = dict(zip(list_, [0]*len(list_)))
-    return update_dict(dict_, 'Oximeter')
-
 def validate_email(email):
     regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
     if re.search(regex, email):
@@ -31,5 +26,23 @@ def validate_mobile(mobile):
     else :
         return False
 
-# print(validate_email('nidbhavsar989@gmail.com'))
-# print(validate_mobile('8160790964'))
+def plasma_handler(res_dict, blood_group):
+    if res_dict['Plasma'] == 1:
+        res_dict['blood_grp'] = blood_group.lower()
+    return res_dict
+
+def check_plasma(res_list):
+    if 'Plasma' in res_list:
+        return True
+    else:
+        return False
+
+# def Factor_Resources(res_dict):
+#     for key, value in res_dict.items():
+#         if value
+
+def example():
+    list_ = list(load_file('data/res.npy'))
+    dict_ = dict(zip(list_, [0]*len(list_)))
+    update_dict(dict_, 'Plasma')
+    return plasma_handler(dict_, 'AB')

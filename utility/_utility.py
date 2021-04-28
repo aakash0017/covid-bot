@@ -83,16 +83,6 @@ def res_spliter(inp_res):
     res = inp_res.split(' ')
     return res
 
-
-# res_id = 1
-# idx_2_res_map = idx_2_res()
-# for i, i1 in idx_2_res_map.items():
-#     print(i, i1)
-
-# Lambda = lambda x: idx_2_res_map[int(x)]
-# X = res_spliter('1 2 3')
-# resources = [Lambda(x) for x in X]
-
 def read_user_input(user_input):
 
     l = user_input.split('\n')
@@ -109,4 +99,4 @@ def read_user_input(user_input):
 # sample_input = 'aakash bhatnagar\nakashbharat.bhatnagar@gmail.com\n8384041898\nvaodara\ndelhi\nplasma AB+\ndescription'
 # print(read_user_input(sample_input))
 
-print(check_validity('wdadwqe', 'city'))
+# print(check_validity('wdadwqe', 'city'))
