@@ -21,6 +21,9 @@ class user:
         # list of resources
         self.resource = []
 
+        # list of user_resources
+        self.user_res = []
+
         # remove later
         # resource file path 
         self.file_path = 'data/res.npy'
@@ -68,6 +71,13 @@ class user:
         elif token == 'blood_grp':
             self.blood_grps = user_utility.plasma_handler(self.res_dict, self.blood_grps, update_key)
 
+    def factor_res(self):
+        self.user_res = user_utility.user_res(self.res_dict)
+        if user_utility.check_plasma(self.user_res):
+            # concate blood groups
+            user_utility.concat_grps(self.user_res, self.blood_grps)
+        return self.user_res
+
 if __name__ == "__main__":
     
     # load idx -> resource mapping
@@ -100,7 +110,7 @@ if __name__ == "__main__":
             user1.update_attributes('resources', res)
         # if res list contains plasma
         if contains_plasma:
-            blood_grp = 'AB'
+            blood_grp = 'AB+ve B+ve'
             user1.update_attributes('blood_grp', blood_grp)
         # check state validity
         result_state = _utility.take_input(state, 'state')
@@ -111,4 +121,4 @@ if __name__ == "__main__":
         print(lst)
         print(x)
         print(bgs)
-    
+        print(user1.factor_res())
