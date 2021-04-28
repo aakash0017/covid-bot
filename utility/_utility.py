@@ -70,6 +70,9 @@ def load_resources():
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
+def load_def_dict():
+    return dict(np.load('data/default_dict.npy', allow_pickle=True))
+
 # load resources and apply mapping from idx -> resource names
 def idx_2_res():
     res = list(load_resources())
@@ -95,3 +98,9 @@ def read_user_input(user_input):
     description = l[6]
 
     return name, email, mobile, city, state, resources, description
+
+
+
+'Name' 'Email' 'City' 'State' 'Resources' 'Description' 'Mobile'
+def convert2dict(user_details):
+    dict_ = load_def_dict()

@@ -15,8 +15,8 @@ class user:
         self.aid = False
 
         # user's location details
-        self.state = None
-        self.city = None
+        self.state = ''
+        self.city = ''
 
         # list of resources
         self.resource = []
