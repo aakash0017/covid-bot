@@ -1,7 +1,6 @@
 import numpy as np
 import enchant
 
-
 def take_input(user_input, input_type):
     user_input = user_input.lower()
     # handle input_type = 'int'
@@ -19,7 +18,6 @@ def check_validity(user_input, input_type):
         return sim_input
 
 # universal invalid user input handler
-
 
 def handle_invalid_input(user_input, input_type):
     k = 5
@@ -40,7 +38,6 @@ def handle_invalid_input(user_input, input_type):
     return list(possible_inputs)
 
 # universal similarity checker for both city and resource input type
-
 
 def most_similar(user_input, input_type):
     if input_type == 'city':
@@ -67,14 +64,24 @@ def most_similar(user_input, input_type):
 def load_cities():
     return np.load('data/cities.npy', allow_pickle=True)
 
-
 def load_resources():
     return np.load('data/res.npy', allow_pickle=True)
-
 
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
+# load resources and apply mapping from idx -> resource names
+def idx_2_res():
+    res = list(load_resources())
+    idx_2_res = dict()
+    for idx, res in enumerate(res):
+        idx_2_res[idx] = res
+    return idx_2_res
+
+# split input resources into list
+def res_spliter(inp_res):
+    res = inp_res.split(' ')
+    return res
 
 def read_user_input(user_input):
 
@@ -88,8 +95,3 @@ def read_user_input(user_input):
     description = l[6]
 
     return name, email, mobile, city, state, resources, description
-
-# sample_input = 'aakash bhatnagar\nakashbharat.bhatnagar@gmail.com\n8384041898\nvaodara\ndelhi\nplasma AB+\ndescription'
-# print(read_user_input(sample_input))
-
-print(check_validity('wdadwqe', 'city'))
