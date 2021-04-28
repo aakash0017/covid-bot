@@ -73,9 +73,6 @@ def load_resources():
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
-def load_defdict():
-    return np.load('../data/default_dict.npy', allow_pickle=True)
-
 # load resources and apply mapping from idx -> resource names
 def idx_2_res():
     res = list(load_resources())
