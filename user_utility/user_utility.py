@@ -26,10 +26,10 @@ def validate_mobile(mobile):
     else :
         return False
 
-def plasma_handler(res_dict, blood_group):
+def plasma_handler(res_dict, blood_grps, user_input):
     if res_dict['Plasma'] == 1:
-        res_dict['blood_grp'] = blood_group.lower()
-    return res_dict
+        blood_grps.append(user_input.lower)
+    return blood_grps
 
 def check_plasma(res_list):
     if 'Plasma' in res_list:
@@ -37,12 +37,23 @@ def check_plasma(res_list):
     else:
         return False
 
-# def Factor_Resources(res_dict):
-#     for key, value in res_dict.items():
-#         if value
+# def factor_Res(res_dict, blood_grps):
+#     if not blood_grps:
+#         avail_list = []
+#         for key, value in res_dict.items():
+#             if value == '1':
+#                 avail_list.app'(key)
+#     else:
+
+
+
 
 def example():
     list_ = list(load_file('data/res.npy'))
     dict_ = dict(zip(list_, [0]*len(list_)))
     update_dict(dict_, 'Plasma')
     return plasma_handler(dict_, 'AB')
+
+a = {'nidhir': 1, 'akash': 2, 'khimendra': 3} 
+print(list(a.values()))
+
