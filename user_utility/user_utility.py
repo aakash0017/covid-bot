@@ -55,11 +55,3 @@ def example():
     dict_ = dict(zip(list_, [0]*len(list_)))
     update_dict(dict_, 'Plasma')
     return plasma_handler(dict_, 'AB')
-
-# list_ = list(load_file('../data/res.npy'))
-# dict_ = dict(zip(list_, [0]*len(list_)))
-# dict_['Plasma'] = 1
-# dict_['Oximeter'] = 1
-# print(type(user_res(dict_)))
-
-# print(concat_grps(['Plasma', 'Oximeter'], ['ab+ve', 'b+ve']))

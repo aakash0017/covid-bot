@@ -95,8 +95,3 @@ def read_user_input(user_input):
     description = l[6]
 
     return name, email, mobile, city, state, resources, description
-
-# sample_input = 'aakash bhatnagar\nakashbharat.bhatnagar@gmail.com\n8384041898\nvaodara\ndelhi\nplasma AB+\ndescription'
-# print(read_user_input(sample_input))
-
-# print(check_validity('wdadwqe', 'city'))
