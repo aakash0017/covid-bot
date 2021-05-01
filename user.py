@@ -50,23 +50,24 @@ class user:
 
     def create_res_dict(self):
         # list of zeros of same lenght as of resources
-        # self.resource = user_utility.load_file(self.file_path)
-        self.resource = res_list() 
+        self.resource = user_utility.load_file(self.file_path)
+        # self.resource = res_list() 
         indicator = [0] * len(self.resource)
         self.res_dict = dict(zip(self.resource, indicator))
 
     def get_details(self):
         self.factor_res()
-        # details = [self.name, self.email_Id, self.mobile, self.user_res, self.city, self.state , '']
-        temp = ''
-        for i in range(len(self.user_res)):
-            if i == 0:
-                temp = self.user_res[i]
-            else:
-                temp = temp + ',' + self.user_res[i]
+        details = [self.name, self.email_Id, self.mobile, self.user_res, self.city, self.state , '']
+        details = [self.name, self.mobile, self.email_Id, self.city, self.state, self.user_res, '']
+        # temp = ''
+        # for i in range(len(self.user_res)):
+        #     if i == 0:
+        #         temp = self.user_res[i]
+        #     else:
+        #         temp = temp + ',' + self.user_res[i]
 
-        details = [self.name, self.mobile, self.email_Id,
-                   self.city, self.state, temp, self.description]
+        # details = [self.name, self.mobile, self.email_Id,
+        #            self.city, self.state, temp, self.description]
         return details
 
     # update user attributes
@@ -78,12 +79,11 @@ class user:
         elif token == 'resources':
             self.res_dict = user_utility.update_dict(self.res_dict, update_key)
         elif token == 'blood_grp':
-            self.blood_grps = user_utility.plasma_handler(
-                self.res_dict, self.blood_grps, update_key)
+            self.blood_grps = user_utility.plasma_handler(self.res_dict, self.blood_grps, update_key)
 
     # update user resource list based on mentioned resources.
     def factor_res(self):
         self.user_res = user_utility.user_res(self.res_dict)
-        # if user_utility.check_plasma(self.user_res):
-        #     # concate blood groups
-        #     user_utility.concat_grps(self.user_res, self.blood_grps)
+        if user_utility.check_plasma(self.user_res):
+            # concate blood groups
+            user_utility.concat_grps(self.user_res, self.blood_grps)

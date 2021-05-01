@@ -7,11 +7,12 @@ from main import main
 
 app = Flask(__name__)
 token = "1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE"
+user_flag = None
 
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://dbcacc092555.ngrok.io 
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://9067370a2e9b.ngrok.io  
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -23,15 +24,6 @@ token = "1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE"
 def write_json(data, filename='response.json'):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
-
-def parse_message(message):
-    chat_id = message["message"]["chat"]["id"]
-    txt = message["message"]["text"]
-    write_json(txt, filename='user_message.txt')
-
-    reply_msg = main(txt)
-
-    return chat_id, reply_msg
 
 def send_message(chat_id, text='xyz-xyz-xyz'):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -56,7 +48,16 @@ def index():
         write_json(msg, 'telegram_request.json')
 
         chat_id = msg["message"]["chat"]["id"]
-        send_message(chat_id, text="hey")
+        txt = msg["message"]["text"]
+
+        # process these text 
+        reply = main()
+
+        res = ''
+        for i in reply["Resources"]:
+            res += ", " + i
+
+        send_message(chat_id, text=res)
         
         return Response('ok', status=200)
     else:

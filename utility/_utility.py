@@ -76,7 +76,7 @@ def load_states():
 
 # load resources and apply mapping from idx -> resource names
 def idx_2_res():
-    res = res_list()
+    res = load_resources()
     idx_2_res = dict()
     for idx, res in enumerate(res):
         idx_2_res[idx] = res
@@ -104,7 +104,7 @@ def generate_dict(detail_list):
     dict_ = default_dict()
     for idx, i in enumerate(dict_):
         dict_[i] = detail_list[idx]
-    return dict_
+    return dict_s
 
 # lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
 # print(generate_dict(lis))

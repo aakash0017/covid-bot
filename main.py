@@ -6,41 +6,42 @@ from user_utility.user_utility import validate_email, validate_mobile, check_pla
 from cms_queries.queries import get_request, post_request
 
 
-def main(user_msg):
+def main():
     
-    # load idx -> resource mapping
+    # creating a json read function later move to utility file
+    f = open('telegram_request.json')
+    user_data = json.load(f)
+    chat_id = user_data["message"]["chat"]["id"]
+    txt = user_data["message"]["text"]
+
+    name, mobile, email, city, state, res_ids, description = read_user_input(txt)
+    
     idx_2_res_map = idx_2_res()
 
-    name, email, mobile, city, state, res_ids, description = read_user_input(user_msg)
-
-    if validate_email(email) and validate_mobile(mobile):
+    if validate_mobile(mobile) and validate_email(email):
         user_obj = user(name, email, mobile)
+        user_obj.resource_provider()
         
-        # validate entered city and state 
         city = take_input(city, 'city')
         state = take_input(state, 'state')
 
-        # convert res_ids => resources
         res_ids = res_spliter(res_ids)
         def Lambda_res(x): return idx_2_res_map[int(x)]
         resources = [Lambda_res(res_id) for res_id in res_ids]
+
+        contains_plasma = check_plasma(resources)
         
-        # update user object resources attributes
         for res in resources:
             user_obj.update_attributes('resources', res)
 
-        # update user object's city and state attribute
-        user_obj.update_attributes('city', city)
         user_obj.update_attributes('state', state)
+        user_obj.update_attributes('city', city)
 
         details = user_obj.get_details()
-        myobj = generate_dict(details)
-        print('---------------------------------------------')
-        print(details)
-        print(myobj)
-        print('---------------------------------------------')
-
-        return 'Thankyou {} for you support'.format(name)
+        gen_dict = generate_dict(details)
+        print(gen_dict)
+        
+    return txt
 
 if __name__ == "__main__":
     main()

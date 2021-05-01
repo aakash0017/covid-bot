@@ -26,9 +26,8 @@ def main():
             # res_ids = '1 2 3'
 
             # name, email, mobile, city, state, res_id = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
-            input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n9 7 5\ndescription'
-            name, email, mobile, city, state, res_ids, description = read_user_input(
-                input_string)
+            input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n1 1 1\ndescription'
+            name, email, mobile, city, state, res_ids, description = read_user_input(input_string)
             print(name, email, mobile, city, state, res_ids)
             if validate_mobile(mobile) and validate_email(email):
                 user1 = user(name, email, mobile)
@@ -48,9 +47,9 @@ def main():
                 for res in resources:
                     user1.update_attributes('resources', res)
                 # if res list contains plasma
-                # if contains_plasma:
-                #     blood_grp = 'AB+ve B+ve'
-                #     user1.update_attributes('blood_grp', blood_grp)
+                if contains_plasma:
+                    blood_grp = 'AB+ve B+ve'
+                    user1.update_attributes('blood_grp', blood_grp)
                 # check state validity
                 result_state = take_input(state, 'state')
                 user1.update_attributes('state', result_state)
