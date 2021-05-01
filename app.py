@@ -3,13 +3,15 @@ from flask import Response
 import requests
 import json
 
+from main import main
+
 app = Flask(__name__)
 token = "1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE"
 
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://95390baf6260.ngrok.io
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://dbcacc092555.ngrok.io 
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -26,7 +28,10 @@ def parse_message(message):
     chat_id = message["message"]["chat"]["id"]
     txt = message["message"]["text"]
     write_json(txt, filename='user_message.txt')
-    return chat_id, txt
+
+    reply_msg = main(txt)
+
+    return chat_id, reply_msg
 
 def send_message(chat_id, text='xyz-xyz-xyz'):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -40,14 +45,19 @@ def index():
     if request.method == "POST":
         msg = request.get_json()
         
-        chat_id, user_input = parse_message(msg)
+        # chat_id, reply_msg = parse_message(msg)
 
-        if user_input == 'nidhir':
-            send_message(chat_id, 'Wrong data')
-            Response('Ok', status=200)
+        # if nidhir == 'Thankyou nidhir for you support':
+        #     send_message(chat_id, 'you are not allowed')
+        #     Response('Ok', status=200)
+        # else:
+        #     send_message(chat_id, reply_msg)
 
         write_json(msg, 'telegram_request.json')
 
+        chat_id = msg["message"]["chat"]["id"]
+        send_message(chat_id, text="hey")
+        
         return Response('ok', status=200)
     else:
         return "<h1>Covid Relief Bot</h1>"
