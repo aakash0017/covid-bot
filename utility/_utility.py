@@ -106,5 +106,8 @@ def generate_dict(detail_list):
         dict_[i] = detail_list[idx]
     return dict_
 
+def array2dict(array):
+    return dict(enumerate(array.flatten(), 1))
+
 # lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
 # print(generate_dict(lis))

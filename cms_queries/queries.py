@@ -24,7 +24,7 @@ def get_request(resource, endpoint, city = '', state = '', environment  = 'local
     
 def post_request(endpoint, body, environment  = 'local', url = 'http://localhost:1337/'):
     
-    aakash_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwODY1ZDUxMDZiZWQyZDhlYzZjNmJjNyIsImlhdCI6MTYxOTYyMjI3OCwiZXhwIjoxNjIyMjE0Mjc4fQ.iuaqdTWqOOCfwJn_FpgyHrg94A-unvmx3GX3qU0m1qE"
+    aakash_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwODY1ZDUxMDZiZWQyZDhlYzZjNmJjNyIsImlhdCI6MTYxOTk0MTE5NywiZXhwIjoxNjIyNTMzMTk3fQ.7DayQ2LgMItKpzXWXdTSwSLocXNUXN08yViGRrrkdLU"
     url = url + endpoint
     res = requests.post(url, data = body, headers = {"Authorization": f"Bearer {aakash_jwt}"} )
     return res.json()

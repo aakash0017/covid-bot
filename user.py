@@ -79,8 +79,13 @@ class user:
             self.blood_grps = user_utility.plasma_handler(self.res_dict, self.blood_grps, update_key)
 
     # update user resource list based on mentioned resources.
+    # def factor_res(self):
+    #     self.user_res = user_utility.user_res(self.res_dict)
+    #     if user_utility.check_plasma(self.user_res):
+    #         # concate blood groups
+    #         user_utility.concat_grps(self.user_res, self.blood_grps)
+
     def factor_res(self):
         self.user_res = user_utility.user_res(self.res_dict)
-        if user_utility.check_plasma(self.user_res):
-            # concate blood groups
-            user_utility.concat_grps(self.user_res, self.blood_grps)
+        # concate blood groups
+        user_utility.concat_grps(self.user_res, self.blood_grps)

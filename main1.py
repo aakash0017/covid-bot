@@ -26,7 +26,7 @@ def main():
             # res_ids = '1 2 3'
 
             # name, email, mobile, city, state, res_id = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
-            input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n5 2 3\ndescription'
+            input_string = 'nidhir Bhavsar\nnidbhavsar989@gmail.com\n8160790964\nVakodara\nGujarat\n2 3 4\ndescription'
             name, mobile, email, city, state, res_ids, description = read_user_input(input_string)
             print(name, email, mobile, city, state, res_ids)
             if validate_mobile(mobile) and validate_email(email):

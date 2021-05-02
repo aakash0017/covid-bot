@@ -26,11 +26,17 @@ def validate_mobile(mobile):
     else :
         return False
 
+# def plasma_handler(res_dict, blood_grps, user_input):
+#     grps = user_input.split(' ')
+#     for bg in grps:
+#         if res_dict['Plasma'] == 1:
+#             blood_grps.append(bg.lower())
+#     return blood_grps
+
 def plasma_handler(res_dict, blood_grps, user_input):
     grps = user_input.split(' ')
     for bg in grps:
-        if res_dict['Plasma'] == 1:
-            blood_grps.append(bg.lower())
+        blood_grps.append(bg.lower())
     return blood_grps
 
 def check_plasma(res_list):
@@ -44,13 +50,19 @@ def user_res(res_dict):
 
 def concat_grps(res_list, blood_grps):
     # remove plasma
-    res_list.remove('Plasma')
+    # res_list.remove('Plasma')
     string = 'Plasma_{0}'
     # concat blood grps to string 
     return [res_list.append(string.format(bg)) for bg in blood_grps]
 
-def save_details(details_dict, chat_id):
+def save_details(details_dict, chat_id, hasplasma_Flag):
     details_dict['chat_id'] = chat_id
+    details_dict['has_plasma'] = hasplasma_Flag
+    np.save('data//beta_dict.npy', details_dict)
+
+def after_bg_save(details_dict, chat_id, hasplasma_Flag=False):
+    details_dict['chat_id'] = chat_id
+    details_dict['has_plasma'] = hasplasma_Flag
     np.save('data//beta_dict.npy', details_dict)
 
 # def example():
