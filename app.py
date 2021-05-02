@@ -12,7 +12,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://9067370a2e9b.ngrok.io  
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://3f7eefa5f6bd.ngrok.io  
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -53,11 +53,7 @@ def index():
         # process these text 
         reply = main()
 
-        res = ''
-        for i in reply["Resources"]:
-            res += ", " + i
-
-        send_message(chat_id, text=res)
+        send_message(chat_id, text=reply)
         
         return Response('ok', status=200)
     else:

@@ -49,6 +49,10 @@ def concat_grps(res_list, blood_grps):
     # concat blood grps to string 
     return [res_list.append(string.format(bg)) for bg in blood_grps]
 
+def save_details(details_dict, chat_id):
+    details_dict['chat_id'] = chat_id
+    np.save('data//beta_dict.npy', details_dict)
+
 # def example():
 #     list_ = list(load_file('../data/res.npy'))
 #     dict_ = dict(zip(list_, [0]*len(list_)))

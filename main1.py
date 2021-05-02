@@ -26,8 +26,8 @@ def main():
             # res_ids = '1 2 3'
 
             # name, email, mobile, city, state, res_id = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
-            input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n1 1 1\ndescription'
-            name, email, mobile, city, state, res_ids, description = read_user_input(input_string)
+            input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n5 2 3\ndescription'
+            name, mobile, email, city, state, res_ids, description = read_user_input(input_string)
             print(name, email, mobile, city, state, res_ids)
             if validate_mobile(mobile) and validate_email(email):
                 user1 = user(name, email, mobile)
@@ -60,6 +60,7 @@ def main():
                 print(myobj)
                 # res = post_request('data', myobj)
                 print(details)
+                print(user1.has_plasma)
 
             bye = input("of you want to exit please enter 0 ")
 

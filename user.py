@@ -34,6 +34,9 @@ class user:
         # tokens
         tokens = ['state', 'city', 'resources', 'blood_grp']
 
+        # user_providance for plasma
+        self.has_plasma = False
+
         # blood_grp for plasma users
         self.blood_grps = []
 
@@ -56,18 +59,12 @@ class user:
         self.res_dict = dict(zip(self.resource, indicator))
 
     def get_details(self):
-        self.factor_res()
-        details = [self.name, self.email_Id, self.mobile, self.user_res, self.city, self.state , '']
-        details = [self.name, self.mobile, self.email_Id, self.city, self.state, self.user_res, '']
-        # temp = ''
-        # for i in range(len(self.user_res)):
-        #     if i == 0:
-        #         temp = self.user_res[i]
-        #     else:
-        #         temp = temp + ',' + self.user_res[i]
-
-        # details = [self.name, self.mobile, self.email_Id,
-        #            self.city, self.state, temp, self.description]
+        if self.has_plasma:
+            self.user_res = user_utility.user_res(self.res_dict)
+            details = [self.name, self.mobile, self.email_Id, self.city, self.state, self.user_res, '']
+        else:
+            self.factor_res()
+            details = [self.name, self.mobile, self.email_Id, self.city, self.state, self.user_res, '']
         return details
 
     # update user attributes

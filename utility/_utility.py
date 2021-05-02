@@ -91,8 +91,8 @@ def read_user_input(user_input):
 
     l = user_input.split('\n')
     name = l[0]
-    email = l[1]
-    mobile = l[2]
+    mobile = l[1]
+    email = l[2]
     city = l[3]
     state = l[4]
     resources = l[5]
@@ -104,7 +104,7 @@ def generate_dict(detail_list):
     dict_ = default_dict()
     for idx, i in enumerate(dict_):
         dict_[i] = detail_list[idx]
-    return dict_s
+    return dict_
 
 # lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
 # print(generate_dict(lis))
