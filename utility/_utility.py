@@ -130,6 +130,12 @@ def regex_checker(recived_txt):
     if matches:
         return '1'
     else:
-        return '0'
+        regex = r"^[0-9]\sin\s[a-zA-Z]+$"
+        matches = re.match(regex, recived_txt)
+        if matches:
+            return "2"
+        else:
+            pass
+    return "3"
 
 # print(send_resource_message())
