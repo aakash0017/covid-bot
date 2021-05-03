@@ -116,7 +116,7 @@ def send_resource_message():
     for key, value in idx_2_res().items():
         tmp_string = tmp_string + "{0:<10} {1}".format(key, value) + "\n"
 
-    result = """ {} """.format(tmp_string)
+    result = """ Resource List: \n{} """.format(tmp_string)
     return result
 
 # print(send_resource_message())

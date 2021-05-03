@@ -1,7 +1,7 @@
 {
-    "update_id": 900071061,
+    "update_id": 900071077,
     "message": {
-        "message_id": 183,
+        "message_id": 215,
         "from": {
             "id": 1721282209,
             "is_bot": false,
@@ -15,7 +15,7 @@
             "last_name": "Bhavsar",
             "type": "private"
         },
-        "date": 1620029660,
-        "text": "AB+ve O+ve"
+        "date": 1620048641,
+        "text": "AB-ve"
     }
 }

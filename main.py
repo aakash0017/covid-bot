@@ -40,6 +40,7 @@ def main():
         after_bg_save(gen_dict, reload_chat_id, False)
         # add post method to update database
         # print(gen_dict)
+        print("if block")
         a = gen_dict["Resources"]
         stri = ''
         for i in a:
@@ -93,6 +94,7 @@ def main():
                 gen_dict["Resources"] = stri
                 url = "https://covid-bot-cms.herokuapp.com/"
                 res = post_request(endpoint="data", body=gen_dict, url=url)
+                print("else block")
                 print(res)
                 print(success_message)
                 return success_message
