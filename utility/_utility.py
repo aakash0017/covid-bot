@@ -11,7 +11,6 @@ def take_input(user_input, input_type):
     processed_input = check_validity(user_input, input_type)
     return processed_input
 
-
 def check_validity(user_input, input_type):
 
     sim_input, status = most_similar(user_input, input_type)
@@ -111,3 +110,13 @@ def array2dict(array):
 
 # lis = ['nidhir', 'nid989@nid.com', 'Vadodara', 'Gujarat', 'Plasma, Oximeter', '', '123456789']
 # print(generate_dict(lis))
+
+def send_resource_message():
+    tmp_string = ""
+    for key, value in idx_2_res().items():
+        tmp_string = tmp_string + "{0:<10} {1}".format(key, value) + "\n"
+
+    result = """ {} """.format(tmp_string)
+    return result
+
+# print(send_resource_message())

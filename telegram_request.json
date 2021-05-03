@@ -1,7 +1,7 @@
 {
-    "update_id": 900071055,
+    "update_id": 900071061,
     "message": {
-        "message_id": 171,
+        "message_id": 183,
         "from": {
             "id": 1721282209,
             "is_bot": false,
@@ -15,19 +15,7 @@
             "last_name": "Bhavsar",
             "type": "private"
         },
-        "date": 1619959973,
-        "text": "Aakash\naakash@gmail.com\n9016667385\nAhmedabad\nGujarat\n1 3 5\ndescription",
-        "entities": [
-            {
-                "offset": 7,
-                "length": 16,
-                "type": "email"
-            },
-            {
-                "offset": 24,
-                "length": 10,
-                "type": "phone_number"
-            }
-        ]
+        "date": 1620029660,
+        "text": "AB+ve O+ve"
     }
 }

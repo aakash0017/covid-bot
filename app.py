@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask import Response
 import requests
 import json
+from utility._utility import send_resource_message
 
 from main import main
 
@@ -12,7 +13,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://3f7eefa5f6bd.ngrok.io  
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://4c47bf054079.ngrok.io 
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -27,7 +28,7 @@ def write_json(data, filename='response.json'):
 
 def send_message(chat_id, text='xyz-xyz-xyz'):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {'chat_id': chat_id, 'text': text}
+    payload = {'chat_id': chat_id, 'text': text, 'parse_mode': "Markdown"}
 
     r = requests.post(url, json=payload)
     return r
@@ -37,25 +38,24 @@ def index():
     if request.method == "POST":
         msg = request.get_json()
         
-        # chat_id, reply_msg = parse_message(msg)
-
-        # if nidhir == 'Thankyou nidhir for you support':
-        #     send_message(chat_id, 'you are not allowed')
-        #     Response('Ok', status=200)
-        # else:
-        #     send_message(chat_id, reply_msg)
-
-        write_json(msg, 'telegram_request.json')
-
-        chat_id = msg["message"]["chat"]["id"]
         txt = msg["message"]["text"]
+        if txt == '/start':
+            # load variables
+            return_message = send_resource_message()
+            send_message(msg["message"]["chat"]["id"], return_message)
+            return Response('ok', status=200)
+        else:
+            write_json(msg, 'telegram_request.json')
 
-        # process these text 
-        reply = main()
+            chat_id = msg["message"]["chat"]["id"]
+            txt = msg["message"]["text"]
 
-        send_message(chat_id, text=reply)
+            # process these text 
+            reply = main()
+
+            send_message(chat_id, text=reply)
         
-        return Response('ok', status=200)
+            return Response('ok', status=200)
     else:
         return "<h1>Covid Relief Bot</h1>"
 

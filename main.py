@@ -39,6 +39,7 @@ def main():
         gen_dict = generate_dict(user_object_Reload.get_details())
         after_bg_save(gen_dict, reload_chat_id, False)
         # add post method to update database
+        # print(gen_dict)
         a = gen_dict["Resources"]
         stri = ''
         for i in a:
@@ -51,7 +52,6 @@ def main():
         return success_message
     else:
         name, mobile, email, city, state, res_ids, description = read_user_input(txt)
-    
         idx_2_res_map = idx_2_res()
         # print(name, mobile, email, city, state, res_ids, description)
         if validate_mobile(mobile) and validate_email(email):
@@ -59,7 +59,9 @@ def main():
             user_obj.resource_provider()
             
             city = take_input(city, 'city')
+            # print(city)
             state = take_input(state, 'state')
+            # print(state)
 
             res_ids = res_spliter(res_ids)
             def Lambda_res(x): return idx_2_res_map[int(x)]
