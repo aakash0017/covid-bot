@@ -4,6 +4,8 @@ import sys
 sys.path.append('../')
 from data.default_dict import default_dict
 from data.res_list import res_list
+import re
+
 
 def take_input(user_input, input_type):
     user_input = user_input.lower()
@@ -118,5 +120,16 @@ def send_resource_message():
 
     result = """ Resource List: \n{} """.format(tmp_string)
     return result
+
+def regex_checker(recived_txt):
+    # type_check values for contributor: 1, needhelp: 2, otherwise: 3
+    # TODO add try and catch block when dealing with multiple type checks
+    regex = r"^([a-zA-Z]+(\\n[a-zA-Z]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
+    refined_txt = recived_txt.replace("\n", "\\n")
+    matches = re.match(regex, refined_txt)
+    if matches:
+        return '1'
+    else:
+        return '0'
 
 # print(send_resource_message())

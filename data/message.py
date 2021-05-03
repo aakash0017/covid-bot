@@ -8,7 +8,7 @@ def contribute():
     # attach resource list below this.
     tmp_str = """
     Enter details in below given format:
-    name
+    first-name
     email
     mobile no.
     city 
