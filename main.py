@@ -1,11 +1,11 @@
 import sys
 import json
 import numpy as np
-import os
+from os import path
 from user import user
 from utility._utility import take_input, read_user_input, idx_2_res, res_spliter, generate_dict, array2dict, regex_checker
 from utility._utility import process_needhelp_input, process_needhelp_result, needhelp_message, decode_residx_op
-from user_utility.user_utility import validate_email, validate_mobile, check_plasma, save_details, load_file, after_bg_save
+from user_utility.user_utility import validate_email, validate_mobile, check_plasma, save_details, load_file, after_bg_save, create_empty_dict
 from cms_queries.queries import get_request, post_request
 
 
@@ -22,19 +22,19 @@ def main():
     chat_id = user_data["message"]["chat"]["id"]
     txt = user_data["message"]["text"]
 
-    # regex_reply = regex_checker(txt)
-    # if regex_reply == '1':
-    #     print("contribute")
-    # elif regex_reply == '2':
-    #     print("need help")
-    # else:
-    #     print("wrong input")
     
-
+    # unique filename for refrencing to dictionary
+    file_name = 'data/{}.npy'.format(chat_id)
+    if path.exists(file_name):
+        pass
+    else:
+        create_empty_dict(chat_id)
+    
     Reply_from_regex = regex_checker(txt)
     if Reply_from_regex == '1':
         print("contributor")
-        reload_dict = array2dict(load_file('data/beta_dict.npy'))
+        
+        reload_dict = array2dict(load_file(file_name))
         reload_chat_id = reload_dict[1]["chat_id"]
         reload_has_plasma = reload_dict[1]["has_plasma"]
         # print(reload_dict)
@@ -119,6 +119,7 @@ def main():
         print("need help")
         # process user input 
         res_idx, city = process_needhelp_input(txt)
+        city = take_input(city, 'city')
         idx2res_map = decode_residx_op()
         res = idx2res_map[int(res_idx)]
         # print(res, city)
