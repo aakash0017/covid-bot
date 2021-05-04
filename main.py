@@ -21,11 +21,6 @@ def main():
     chat_id = user_data["message"]["chat"]["id"]
     txt = user_data["message"]["text"]
 
-    reload_dict = array2dict(load_file('data/beta_dict.npy'))
-    reload_chat_id = reload_dict[1]["chat_id"]
-    reload_has_plasma = reload_dict[1]["has_plasma"]
-    # print(reload_dict)
-
     # regex_reply = regex_checker(txt)
     # if regex_reply == '1':
     #     print("contribute")
@@ -33,6 +28,12 @@ def main():
     #     print("need help")
     # else:
     #     print("wrong input")
+    
+
+    reload_dict = array2dict(load_file('data/beta_dict.npy'))
+    reload_chat_id = reload_dict[1]["chat_id"]
+    reload_has_plasma = reload_dict[1]["has_plasma"]
+    # print(reload_dict)
     
     if reload_chat_id == chat_id and reload_has_plasma:
         # new user object 
@@ -47,16 +48,16 @@ def main():
         gen_dict = generate_dict(user_object_Reload.get_details())
         after_bg_save(gen_dict, reload_chat_id, False)
         # add post method to update database
-        # print(gen_dict)
+        print(gen_dict)
         print("if block")
         a = gen_dict["Resources"]
         stri = ''
         for i in a:
             stri += i + ',' 
         gen_dict["Resources"] = stri
-        url = "https://covid-bot-cms.herokuapp.com/"
-        res = post_request(endpoint="data", body=gen_dict, url=url)
-        print(res)
+        # url = "https://covid-bot-cms.herokuapp.com/"
+        # res = post_request(endpoint="data", body=gen_dict, url=url)
+        # print(res)
         print(success_message)
         return success_message
     else:
@@ -94,16 +95,16 @@ def main():
 
             else:
                 # add post method to update database
-                # print(gen_dict)
+                print(gen_dict)
                 a = gen_dict["Resources"]
                 stri = ''
                 for i in a:
                     stri += i + ',' 
                 gen_dict["Resources"] = stri
-                url = "https://covid-bot-cms.herokuapp.com/"
-                res = post_request(endpoint="data", body=gen_dict, url=url)
+                # url = "https://covid-bot-cms.herokuapp.com/"
+                # res = post_request(endpoint="data", body=gen_dict, url=url)
+                # print(res)
                 print("else block")
-                print(res)
                 print(success_message)
                 return success_message
 

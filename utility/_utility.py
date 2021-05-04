@@ -128,14 +128,19 @@ def regex_checker(recived_txt):
     refined_txt = recived_txt.replace("\n", "\\n")
     matches = re.match(regex, refined_txt)
     if matches:
-        return '1'
+        return "1"
     else:
         regex = r"^[0-9]\sin\s[a-zA-Z]+$"
         matches = re.match(regex, recived_txt)
         if matches:
             return "2"
         else:
-            pass
+            regex = r"^[a-zA-Z]{1,2}(\+|\-)+( [a-zA-Z]{1,2}(\+|\-))*.*$"
+            matches = re.match(regex, recived_txt)
+            if matches:
+                return "1"
+            else:
+                pass
     return "3"
 
 # print(send_resource_message())
