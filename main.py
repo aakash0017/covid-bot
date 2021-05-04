@@ -134,9 +134,6 @@ def main():
         print("Not contributor or need help")
         print(error_message)
         return error_message
-            
-
-    
 
 if __name__ == "__main__":
     main()
