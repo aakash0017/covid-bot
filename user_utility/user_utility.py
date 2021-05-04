@@ -62,18 +62,18 @@ def save_details(details_dict, chat_id, hasplasma_Flag):
     # x.remove('Plasma')
     # print(x)
     print(details_dict)
-    file_name = "data//{}.npy".format(chat_id)
+    file_name = "data//user_objects_data//{}.npy".format(chat_id)
     np.save(file_name, details_dict)
 
 def create_empty_dict(chat_id):
     default_dict = {'Name': '', 'Mobile': '', 'Email': '', 'City': '', 'State': '', 'Resources': [''], 'Description': ''}
     default_dict['chat_id'] = chat_id
     default_dict['has_plasma'] = False
-    file_name = 'data//{}.npy'.format(chat_id)
+    file_name = 'data//user_objects_data//{}.npy'.format(chat_id)
     np.save(file_name, default_dict) 
 
 def after_bg_save(details_dict, chat_id, hasplasma_Flag=False):
     details_dict['chat_id'] = chat_id
     details_dict['has_plasma'] = hasplasma_Flag
-    file_name = "data//{}.npy".format(chat_id)
+    file_name = "data//user_objects_data//{}.npy".format(chat_id)
     np.save(file_name, details_dict)

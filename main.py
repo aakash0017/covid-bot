@@ -24,7 +24,7 @@ def main():
 
     
     # unique filename for refrencing to dictionary
-    file_name = 'data/{}.npy'.format(chat_id)
+    file_name = 'data/user_objects_data/{}.npy'.format(chat_id)
     if path.exists(file_name):
         pass
     else:
