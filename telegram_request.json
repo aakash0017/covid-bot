@@ -1,7 +1,7 @@
 {
-    "update_id": 900071087,
+    "update_id": 900071121,
     "message": {
-        "message_id": 231,
+        "message_id": 297,
         "from": {
             "id": 1721282209,
             "is_bot": false,
@@ -15,7 +15,7 @@
             "last_name": "Bhavsar",
             "type": "private"
         },
-        "date": 1620111049,
-        "text": "AB+ AB-"
+        "date": 1620129435,
+        "text": "3 in Mumbai"
     }
 }

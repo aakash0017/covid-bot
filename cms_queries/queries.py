@@ -18,6 +18,7 @@ def get_request(resource, endpoint, city = '', state = '', environment  = 'local
     if len(_list) == 0:
         return('Currenntly we do not have the resources please try again later')
     else: 
+        _list
         return _list
 
     
@@ -29,4 +30,7 @@ def post_request(endpoint, body, environment  = 'local', url = 'http://localhost
     res = requests.post(url, data = body, headers = {"Authorization": f"Bearer {aakash_jwt}"} )
     return res.json()
 
-
+# url = "https://covid-bot-cms.herokuapp.com/"
+# res = get_request('Remdisvir', endpoint="data", url=
+#             url, city='Mumbai')
+# print(res)
