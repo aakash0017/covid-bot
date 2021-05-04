@@ -59,9 +59,9 @@ def main():
             for i in a:
                 stri += i + ',' 
             gen_dict["Resources"] = stri
-            # url = "https://covid-bot-cms.herokuapp.com/"
-            # res = post_request(endpoint="data", body=gen_dict, url=url)
-            # print(res)
+            url = "https://covid-bot-cms.herokuapp.com/"
+            res = post_request(endpoint="data", body=gen_dict, url=url)
+            print(res)
             print(success_message)
             return success_message
         else:
