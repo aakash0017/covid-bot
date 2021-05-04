@@ -1,65 +1,83 @@
-from flask import Flask, redirect, url_for, request, jsonify, render_template
-from twilio.twiml.messaging_response import MessagingResponse
+from flask import Flask, request
+from flask import Response
+import requests
+import json
+from utility._utility import send_resource_message, send_needhelp_reslist_msg
+from data.message import contribute, start, need_help
+from main import main
 
 app = Flask(__name__)
+token = "1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE"
+user_flag = None
 
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://00ee8867776e.ngrok.io 
 
+# TODO BOT
+# 1. Locally create a basic Flask application
+# 2. Set up a tunnel
+# 3. Set a webhook
+# 4. Recieve and parse a user's messages'
+# 5. Send message to a user.
 
-@app.route('/sms', methods=['POST'])
-def sms():
-    # Fetch the message
-    msg = request.form.get('Body')
+def write_json(data, filename='response.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
-    # converstion_type = input(
-    #         'For checking resources in your city please enter 1 \n If you have verified leads for a city please enter 0')
+def send_message(chat_id, text='xyz-xyz-xyz'):
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {'chat_id': chat_id, 'text': text, 'parse_mode': "Markdown"}
 
-    # if converstion_type == '0':
-    #     # load idx -> resource mapping
-    #     idx_2_res_map = idx_2_res()
-    #     for key, value in idx_2_res_map.items():
-    #         print(key, ':', value)
-    #     # # input from user
-    #     # res_ids = '1 2 3'
+    r = requests.post(url, json=payload)
+    return r
 
-    #     # name, email, mobile, city, state, res_id = input('name: '), input('email: '), input('mobile: '), input('ciy: '), input('state: '), input('resource: ')
-    #     input_string = 'nidhir\nnid989@nid.com\n8160790964\nvakodara\ngujarat\n9 7 5\ndescription'
-    #     name, email, mobile, city, state, res_ids, description = read_user_input(input_string)
-    #     print(name, email, mobile, city, state, res_ids)
-    #     if validate_mobile(mobile) and validate_email(email):
-    #         user1 = user(name, email, mobile)
-    #         user1.resource_provider()
-    #         result_city = take_input(city, 'city')
-    #         res_ids = res_spliter(res_ids)
-    #         def Lambda_res(x): return idx_2_res_map[int(x)]
-    #         resources = [Lambda_res(res_id) for res_id in res_ids]
-    #         # contains_plasma = check_plasma(resources)
-    #         for res in resources:
-    #             user1.update_attributes('resources', res)
-    #             # if res list contains plasma
-    #             # if contains_plasma:
-    #             #     blood_grp = 'AB+ve B+ve'
-    #             #     user1.update_attributes('blood_grp', blood_grp)
-    #             # check state validity
-    #             result_state = take_input(state, 'state')
-    #             user1.update_attributes('state', result_state)
-    #             user1.update_attributes('city', result_city)
-    #             # user1.update_attributes('resources', result_res)
-    #             details = user1.get_details()
-    #             myobj = generate_dict(details)
-    #             print(myobj)
-    #             res = post_request('data', myobj)
-    #             print(details)
+@app.route('/', methods=["POST", "GET"])
+def index():
+    if request.method == "POST":
+        msg = request.get_json()
+        
+        txt = msg["message"]["text"]
+        if txt == '/start':
+            print("Start block")
+            return_message = start()
+            send_message(msg["message"]["chat"]["id"], return_message)
+            return Response('ok', status=200)
 
-    # Create reply
-    resp = MessagingResponse()
-    resp.message("You said: {}".format(msg))
+        elif txt == '/contribute' or txt == '/needhelp':
+            if txt == '/contribute':
+                print("Start block")
+                # load variables
+                msg0 = contribute()
+                msg1 = send_resource_message()
+                send_message(msg["message"]["chat"]["id"], msg0)
+                send_message(msg["message"]["chat"]["id"], msg1)
+                return Response('ok', status=200)
+            elif txt == '/needhelp':
+                print("Start block")
+                # load variables
+                msg0 = need_help()
+                msg1 = send_needhelp_reslist_msg()
+                send_message(msg["message"]["chat"]["id"], msg0)
+                send_message(msg["message"]["chat"]["id"], msg1)
+                return Response('ok', status=200)
 
-    return str(resp)
+        else:
+            print("Else block")
+            write_json(msg, 'telegram_request.json')
 
+            chat_id = msg["message"]["chat"]["id"]
+            txt = msg["message"]["text"]
+
+            # process these text 
+            reply = main()
+
+            send_message(chat_id, text=reply)
+        
+            return Response('ok', status=200)
+    else:
+        return "<h1>Covid Relief Bot</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)
