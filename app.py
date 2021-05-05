@@ -38,7 +38,7 @@ def index():
     if request.method == "POST":
         msg = request.get_json()
         
-         try:
+        try:
             txt = msg["message"]["text"]
         except:
             write_json(msg, 'telegram_request.json')
