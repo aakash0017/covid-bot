@@ -13,7 +13,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://0455c51f1506.ngrok.io  
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://aee48db30fe1.ngrok.io
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -38,7 +38,15 @@ def index():
     if request.method == "POST":
         msg = request.get_json()
         
-        txt = msg["message"]["text"]
+         try:
+            txt = msg["message"]["text"]
+        except:
+            write_json(msg, 'telegram_request.json')
+            chat_id = msg["edited_message"]["chat"]["id"]
+            return_message = enter_correct_det()
+            send_message(chat_id, return_message)
+            return Response('ok', status=200)
+        
         if txt == '/start':
             print("Start block")
             return_message = start()
