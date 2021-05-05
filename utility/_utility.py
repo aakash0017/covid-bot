@@ -122,7 +122,7 @@ def regex_checker(recived_txt):
     # type_check values for contributor: 1, needhelp: 2, otherwise: 3
     # TODO add try and catch block when dealing with multiple type checks
     # regex = r"^([a-zA-Z]+(\\n[a-zA-Z]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
-    regex = r"^(([a-zA-Z]+( [a-zA-Z]+)*)(\\n[a-zA-Z]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
+    regex = r"^(([a-zA-Z]+( [a-zA-Z]+)*)(\\n[a-zA-Z._-]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
     refined_txt = recived_txt.replace("\n", "\\n")
     matches = re.match(regex, refined_txt)
     if matches:
@@ -133,7 +133,7 @@ def regex_checker(recived_txt):
         if matches:
             return "2"
         else:
-            regex = r"^[a-zA-Z]{1,2}(\+|\-)+( [a-zA-Z]{1,2}(\+|\-))*.*$"
+            regex = r"^[A|B|AB|O|a|b|ab|o]{1,2}(\+|\-)+( [a-zA-Z]{1,2}(\+|\-))*.*$"
             matches = re.match(regex, recived_txt)
             if matches:
                 return "1"
