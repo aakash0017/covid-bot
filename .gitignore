@@ -136,3 +136,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Requested json file
+\telegram_request.json
+
+# dynamic files
+\data\user_objects_data

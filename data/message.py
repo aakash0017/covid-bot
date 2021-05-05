@@ -8,7 +8,7 @@ def contribute():
     # attach resource list below this.
     tmp_str = """
     Enter details in below given format:
-    first-name
+    name
     email
     mobile no.
     city 
@@ -25,5 +25,11 @@ def contribute():
 def need_help():
     tmp_str = """
     Enter details in below given format:\nResource in City or state\nNote: pls enter resource by their serial no's provided below.
+    """
+    return tmp_str
+
+def enter_correct_det():
+    tmp_str = """
+    Enter correct details and don't edit the message.
     """
     return tmp_str
