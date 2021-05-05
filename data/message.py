@@ -24,9 +24,6 @@ def contribute():
 
 def need_help():
     tmp_str = """
-    Enter details in below given format:
-    Resource in City or state 
-    
-    Note: pls enter resource by their serial no's provided below.
+    Enter details in below given format:\nResource in City or state\nNote: pls enter resource by their serial no's provided below.
     """
-    return ''
+    return tmp_str

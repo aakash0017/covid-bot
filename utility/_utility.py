@@ -184,7 +184,7 @@ def process_needhelp_result(get_Result_list):
 def needhelp_message(result_list):
     temp_string = ""
     for tup in result_list:
-        temp_string = temp_string + "{0:<5} {1}".format(tup[1], tup[0]) + "\n"
+        temp_string = temp_string + "{0:<10} {1}".format(tup[1], tup[0]) + "\n"
     result_message = """Here are some contacts for requested covid resource:  \n{} """.format(temp_string)
     return result_message
 
