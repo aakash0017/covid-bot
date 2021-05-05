@@ -138,7 +138,7 @@ dmypy.json
 cython_debug/
 
 # Requested json file
-/telegram_request.json
+\telegram_request.json
 
 # dynamic files
-/data/user_objects_data
+\data\user_objects_data
