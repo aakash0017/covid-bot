@@ -46,7 +46,7 @@ def main():
             user_object_Reload.update_attributes('city', reload_dict[1]["City"])
             for i in reload_dict[1]["Resources"]:
                 user_object_Reload.update_attributes('resources', i)
-            blood_grps = txt
+            blood_grps = txt.strip()
             # update blood attributes 
             user_object_Reload.update_attributes('blood_grp', blood_grps)
             gen_dict = generate_dict(user_object_Reload.get_details())
@@ -59,13 +59,14 @@ def main():
             for i in a:
                 stri += i + ',' 
             gen_dict["Resources"] = stri
-            url = "https://covid-bot-cms.herokuapp.com/"
-            res = post_request(endpoint="data", body=gen_dict, url=url)
-            print(res)
+            # url = "https://covid-bot-cms.herokuapp.com/"
+            # res = post_request(endpoint="data", body=gen_dict, url=url)
+            # print(res)
             print(success_message)
             return success_message
         else:
             name, mobile, email, city, state, res_ids, description = read_user_input(txt)
+            print(name, mobile, email, city, state, res_ids, description)
             idx_2_res_map = idx_2_res()
             # print(name, mobile, email, city, state, res_ids, description)
             if validate_mobile(mobile) and validate_email(email):
@@ -105,9 +106,9 @@ def main():
                     for i in a:
                         stri += i + ',' 
                     gen_dict["Resources"] = stri
-                    url = "https://covid-bot-cms.herokuapp.com/"
-                    res = post_request(endpoint="data", body=gen_dict, url=url)
-                    print(res)
+                    # url = "https://covid-bot-cms.herokuapp.com/"
+                    # res = post_request(endpoint="data", body=gen_dict, url=url)
+                    # print(res)
                     print("else block")
                     print(success_message)
                     return success_message
@@ -115,6 +116,7 @@ def main():
             print(error_message)
             return error_message
     
+        print('Here')
     elif Reply_from_regex == '2':
         print("need help")
         # process user input 

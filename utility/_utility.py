@@ -91,13 +91,13 @@ def res_spliter(inp_res):
 def read_user_input(user_input):
 
     l = user_input.split('\n')
-    name = l[0]
-    mobile = l[1]
-    email = l[2]
-    city = l[3]
-    state = l[4]
-    resources = l[5]
-    description = l[6]
+    name = l[0].strip()
+    mobile = l[1].strip()
+    email = l[2].strip()
+    city = l[3].strip()
+    state = l[4].strip()
+    resources = l[5].strip()
+    description = l[6].strip()
 
     return name, email, mobile, city, state, resources, description
 
@@ -122,7 +122,7 @@ def regex_checker(recived_txt):
     # type_check values for contributor: 1, needhelp: 2, otherwise: 3
     # TODO add try and catch block when dealing with multiple type checks
     # regex = r"^([a-zA-Z]+(\\n[a-zA-Z]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
-    regex = r"^(([a-zA-Z]+( [a-zA-Z]+)*)(\\n[a-zA-Z._-]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+(\\[a-zA-Z]+)+)[0-9]+\\n([a-zA-Z]+(\\n[a-zA-Z]+)+)\\n([0-9]+( [0-9]+)*)\\n[a-zA-Z].*$"
+    regex = r"^(([a-zA-Z]+( [a-zA-Z]+)*) *(\\n[a-zA-Z._-]+)+)([0-9]*)@[a-zA-Z]+\.([a-zA-Z]+( *\\[a-zA-Z]+)+)[0-9]+ *\\n([a-zA-Z]+ *(\\n[a-zA-Z]+)+) *\\n([0-9]+( [0-9]+)*) *\\n[a-zA-Z].*$"
     refined_txt = recived_txt.replace("\n", "\\n")
     matches = re.match(regex, refined_txt)
     if matches:

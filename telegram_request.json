@@ -1,19 +1,33 @@
 {
-    "update_id": 900071319,
+    "update_id": 900071340,
     "message": {
-        "message_id": 688,
+        "message_id": 730,
         "from": {
-            "id": 1463328398,
+            "id": 1721282209,
             "is_bot": false,
-            "first_name": "Beast",
+            "first_name": "Nidhir",
+            "last_name": "Bhavsar",
             "language_code": "en"
         },
         "chat": {
-            "id": 1463328398,
-            "first_name": "Beast",
+            "id": 1721282209,
+            "first_name": "Nidhir",
+            "last_name": "Bhavsar",
             "type": "private"
         },
-        "date": 1620212159,
-        "text": "a+"
+        "date": 1620236407,
+        "text": "AB+ B+     ",
+        "entities": [
+            {
+                "offset": 6,
+                "length": 26,
+                "type": "email"
+            },
+            {
+                "offset": 33,
+                "length": 10,
+                "type": "phone_number"
+            }
+        ]
     }
 }
