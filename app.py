@@ -38,7 +38,6 @@ def index():
     if request.method == "POST":
         msg = request.get_json()
         
-        # try for message txts
         try:
             txt = msg["message"]["text"]
         except:
