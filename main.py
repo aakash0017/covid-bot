@@ -122,6 +122,8 @@ def main():
         city = take_input(city, 'city')
         idx2res_map = decode_residx_op()
         res = idx2res_map[int(res_idx)]
+        print(res)
+        print(res_idx, city)
         # print(res, city)
         url = "https://covid-bot-cms.herokuapp.com/"
         res = get_request(res, endpoint="data", url=url, city=city)
