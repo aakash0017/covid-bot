@@ -11,7 +11,7 @@ from cms_queries.queries import get_request, post_request
 
 def main():
 
-    # response messages:
+    # response messages
     success_message = 'Thank you for your response'
     plasma_message = 'Please provide blood groups for provided plasma'
     error_message = 'Please enter correct details'
