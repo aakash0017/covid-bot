@@ -1,7 +1,7 @@
 {
-    "update_id": 900071340,
+    "update_id": 900071365,
     "message": {
-        "message_id": 730,
+        "message_id": 782,
         "from": {
             "id": 1721282209,
             "is_bot": false,
@@ -15,19 +15,7 @@
             "last_name": "Bhavsar",
             "type": "private"
         },
-        "date": 1620236407,
-        "text": "AB+ B+     ",
-        "entities": [
-            {
-                "offset": 6,
-                "length": 26,
-                "type": "email"
-            },
-            {
-                "offset": 33,
-                "length": 10,
-                "type": "phone_number"
-            }
-        ]
+        "date": 1620385242,
+        "text": "9 in Chandigar"
     }
 }
