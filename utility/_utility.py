@@ -1,5 +1,6 @@
 import numpy as np
-import enchant
+# import enchant
+import nltk
 import sys
 sys.path.append('../')
 from data.default_dict import default_dict
@@ -35,7 +36,8 @@ def handle_invalid_input(user_input, input_type):
     scores = []
     # calculate distance for all cities
     for content in objective:
-        distance = enchant.utils.levenshtein(user_input, content)
+        # distance = enchant.utils.levenshtein(user_input, content)
+        distance = nltk.edit_distance(user_input, content)
         scores.append(distance)
     # convert to numpy array
     scores = np.array(scores)
@@ -55,7 +57,8 @@ def most_similar(user_input, input_type):
     scores = []
     # calculate score b/w contents in objective list and user_input
     for content in objective:
-        distance = enchant.utils.levenshtein(user_input, content)
+        # distance = enchant.utils.levenshtein(user_input, content)
+        distance = nltk.edit_distance(user_input, content)
         scores.append(distance)
     # convert to numpy array
     scores = np.array(scores)
