@@ -3,7 +3,7 @@ import numpy as np
 import nltk
 import sys
 sys.path.append('../')
-from data.default_dict import default_dict
+from data.default_dict import default_dict, default_chat_dict
 from data.res_list import needhelp_Reslist, needhelp_Reslist_op
 import re
 
@@ -192,3 +192,10 @@ def needhelp_message(result_list):
     result_message = """Here are some contacts for requested covid resource:  \n{} """.format(temp_string)
     return result_message
 
+def generate_chat(chatdet_list):
+    dict_ = default_chat_dict()
+    print(dict_)
+    for idx, i in enumerate(dict_):
+        dict_[i] = chatdet_list[idx]
+    return dict_
+    

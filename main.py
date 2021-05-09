@@ -6,22 +6,24 @@ from user import user
 from utility._utility import take_input, read_user_input, idx_2_res, res_spliter, generate_dict, array2dict, regex_checker
 from utility._utility import process_needhelp_input, process_needhelp_result, needhelp_message, decode_residx_op
 from user_utility.user_utility import validate_email, validate_mobile, check_plasma, save_details, load_file, after_bg_save, create_empty_dict
-from cms_queries.queries import get_request, post_request
+from cms_queries.queries import get_request, post_request, get_chat
 
 
-def main():
 
+def main(chat_id, txt):
+
+    print(txt, chat_id)
+    
     # response messages:
     success_message = 'Thank you for your response'
     plasma_message = 'Please provide blood groups for provided plasma'
     error_message = 'Please enter correct details'
 
-    # creating a json read function later move to utility file
-    f = open('telegram_request.json')
-    user_data = json.load(f)
-    chat_id = user_data["message"]["chat"]["id"]
-    txt = user_data["message"]["text"]
-
+    # # creating a json read function later move to utility file
+    # f = open('telegram_request.json')
+    # user_data = json.load(f)
+    # chat_id = user_data["message"]["chat"]["id"]
+    # txt = user_data["message"]["text"]
     
     # unique filename for refrencing to dictionary
     file_name = 'data/user_objects_data/{}.npy'.format(chat_id)
@@ -140,7 +142,5 @@ def main():
         print(error_message)
         return error_message
     
-    # print(take_input('Vakodara', 'Vadodara'))
-
 if __name__ == "__main__":
-    main()
+    main('900071467', '11 in Chandigarh')

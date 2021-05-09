@@ -2,8 +2,9 @@ from flask import Flask, request
 from flask import Response
 import requests
 import json
-from utility._utility import send_resource_message, send_needhelp_reslist_msg
+from utility._utility import send_resource_message, send_needhelp_reslist_msg, generate_chat
 from data.message import contribute, start, need_help, enter_correct_det
+from cms_queries.queries import post_chat
 from main import main
 
 app = Flask(__name__)
@@ -13,7 +14,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://a738b3b44e5e.ngrok.io  
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://a051cbc26aa5.ngrok.io  
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -26,7 +27,7 @@ def write_json(data, filename='response.json'):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
-def send_message(chat_id, text='xyz-xyz-xyz'):
+def send_message(chat_id, text='abc'):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     payload = {'chat_id': chat_id, 'text': text, 'parse_mode': "Markdown"}
 
@@ -37,10 +38,6 @@ url = "https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEK
 
 @app.route('/', methods=["POST", "GET"])
 def index():
-    
-    # res = requests.post(url=url)
-    
-    # print(res.json())
     
     if request.method == "POST":
         msg = request.get_json()
@@ -80,15 +77,30 @@ def index():
 
         else:
             print("Else block")
-            write_json(msg, 'telegram_request.json')
+            # since heroku doesn't support dynamic file establishment hence saving these via strapi
+            # write_json(msg, 'telegram_request.json')
 
-            chat_id = msg["message"]["chat"]["id"]
-            txt = msg["message"]["text"]
-
+            updateId = msg["update_id"]
+            chatId = msg["message"]["chat"]["id"]
+            Text = msg["message"]["text"]
+            
+            # concat_data = [updateId, chatId, Text]
+            # # send concatenated list to generate_chat method for generating dict.
+            # postChatBody = generate_chat(concat_data)
+            # print(postChatBody)
+            # url = "https://covid-bot-cms.herokuapp.com"
+            # res = post_chat(endpoint='/Chat-infos', body=postChatBody, url=url)
+            # print(res)
+            
+            # config.txt = Text
+            # config.chat_id = chatId
+            
             # process these text 
-            reply = main()
+            # reply = main(updateId)
+            reply = main(chatId, Text)
 
-            send_message(chat_id, text=reply)
+            send_message(chatId, text=reply)
+            # send_message(chatId)
         
             return Response('ok', status=200)
     else:
