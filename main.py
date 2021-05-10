@@ -21,14 +21,14 @@ def main(chat_id, txt):
         print("contributor")
         
         url = "https://covid-bot-cms.herokuapp.com/"
-        print(chat_id)
+        chat_id = str(chat_id)
         reload_dict = get_object(endpoint='Beta-objects', chat_id=chat_id, url=url)
         print(reload_dict)
         
         if reload_dict:
             reload_has_plasma = reload_dict["has_plasma"]
             reload_chat_id = reload_dict["chat_id"]
-            if reload_has_plasma:
+            if reload_has_plasma == 'True':
                 # new user object 
                 print('hasPlasma block')
                 user_object_Reload = user(reload_dict["Name"], reload_dict["Email"], reload_dict["Mobile"])
@@ -134,4 +134,4 @@ def main(chat_id, txt):
         return error_message
     
 if __name__ == "__main__":
-    main('1721282209', 'A+ B+')
+    main('1721282209', 'A+ O+')
