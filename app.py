@@ -86,6 +86,7 @@ def index():
             print(chatId)
             print(type(chatId))
             # process these text 
+            send_message(chat_id=chatId, text="Stand By...")
             reply = main(chatId, Text)
 
             send_message(chat_id=chatId, text=reply)
