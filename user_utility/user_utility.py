@@ -1,5 +1,6 @@
 import numpy as np
 import re
+from cms_queries.queries import post_request
 
 # load files from data directory
 def load_file(file_path):
@@ -59,29 +60,43 @@ def save_details(details_dict, chat_id, hasplasma_Flag):
     details_dict['chat_id'] = chat_id
     details_dict['has_plasma'] = hasplasma_Flag
     details_dict['Resources'].remove("Plasma")
-    # x.remove('Plasma')
-    # print(x)
-    print(details_dict)
-    file_name = "data//user_objects_data//{}.npy".format(chat_id)
-    np.save(file_name, details_dict)
-
-def create_empty_dict(chat_id):
-    default_dict = {'Name': '', 'Mobile': '', 'Email': '', 'City': '', 'State': '', 'Resources': [''], 'Description': ''}
-    default_dict['chat_id'] = chat_id
-    default_dict['has_plasma'] = False
-    file_name = 'data//user_objects_data//{}.npy'.format(chat_id)
-    np.save(file_name, default_dict) 
-
-def create_object_body(chat_id):
-    default_dict = {'Name': '', 'Mobile': '', 'Email': '', 'City': '', 'State': '', 'Resources': [''], 'Description': ''}
-    default_dict['chat_id'] = chat_id
-    default_dict['has_plasma'] = False
-    # file_name = 'data//user_objects_data//{}.npy'.format(chat_id)
-    # np.save(file_name, default_dict) 
-    return 
-
+    tmp_string = ''
+    for i in details_dict['Resources']:
+        tmp_string += i + ','
+    details_dict['Resources'] = tmp_string
+    print("67", details_dict)
+    dict_body = def_dict_2_post_mapping(details_dict)
+    url = 'https://covid-bot-cms.herokuapp.com'
+    res = post_request(endpoint='/Beta-objects', body=dict_body, url=url)
+    print(res)
+    return res
+    
+    
 def after_bg_save(details_dict, chat_id, hasplasma_Flag=False):
     details_dict['chat_id'] = chat_id
     details_dict['has_plasma'] = hasplasma_Flag
-    file_name = "data//user_objects_data//{}.npy".format(chat_id)
-    np.save(file_name, details_dict)
+    
+    tmp_string = ''
+    for i in details_dict['Resources']:
+        tmp_string += i + ','
+    details_dict['Resources'] = tmp_string
+    print("60", details_dict)
+    
+    dict_body = def_dict_2_post_mapping(details_dict)
+    url = 'https://covid-bot-cms.herokuapp.com'
+    res = post_request(endpoint='/Beta-objects', body=dict_body, url=url)
+    print(res)
+    return res
+    
+def def_dict_2_post_mapping(details_dict):
+    dict_ = {'name': '', 'mobile': '', 'email': '', 'city': '', 'state': '', 'resources': '', 'description': '', 'chatID': '', 'hasPlasma': ''}
+    dict_['name'] = details_dict['Name']
+    dict_['mobile'] = details_dict['Mobile']
+    dict_['email'] = details_dict['Email']
+    dict_['city'] = details_dict['City']
+    dict_['state'] = details_dict['State']
+    dict_['resources'] = details_dict['Resources']
+    dict_['description'] = details_dict['Description']
+    dict_['chatID'] = details_dict['chat_id']
+    dict_['hasPlasma'] = details_dict['has_plasma']
+    return dict_

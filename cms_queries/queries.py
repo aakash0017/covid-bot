@@ -1,6 +1,4 @@
 import requests
-import datetime
-import dateutil.parser
 aakash_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwODY1ZDUxMDZiZWQyZDhlYzZjNmJjNyIsImlhdCI6MTYxOTQxODU1OSwiZXhwIjoxNjIyMDEwNTU5fQ.Y52bTH80hazoVPomjX9jyE4LyyOKkEnZIRjAwgPeIuY"
 
 
@@ -40,6 +38,9 @@ def get_object(chat_id, endpoint, environment = 'local', url = 'http://localhost
         if chat_id == user_obj['chatID']:
             temp_list.append(user_obj)
     
+    if not temp_list:
+        return dict()
+    
     dict_ = {'Name': '', 'Mobile': '', 'Email': '', 'City': '', 'State': '', 'Resources': [''], 'Description': '', 'chat_id': '', 'has_plasma': ''}
     res_list = temp_list[len(temp_list) - 1]
     
@@ -56,16 +57,3 @@ def get_object(chat_id, endpoint, environment = 'local', url = 'http://localhost
     dict_['has_plasma'] = res_list['hasPlasma']
     
     return dict_
-
-# sending post request
-# dict_ = {'name': 'Nidhir', 'mobile': '7859860581', 'email': 'nidbhavsar989@gmail.com', 'city': 'vadodara', 'state': 'gujarat', 'resources': 'plasma_a+', 'description': 'great', 'chatID': '1721282210', 'hasPlasma': 'True'}
-# url = "https://covid-bot-cms.herokuapp.com"
-# res = post_request(endpoint='/Beta-objects', body=dict_, url=url)
-# print(res) 
-
-
-# getting data objects from database 
-chat_id = '1721282210'
-url = "https://covid-bot-cms.herokuapp.com"
-res = get_object(endpoint='/Beta-objects', chat_id=chat_id, url=url)
-print(res)

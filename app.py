@@ -4,7 +4,7 @@ import requests
 import json
 from utility._utility import send_resource_message, send_needhelp_reslist_msg, generate_chat
 from data.message import contribute, start, need_help, enter_correct_det
-from cms_queries.queries import post_chat
+from cms_queries.queries import post_request
 from main import main
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://a051cbc26aa5.ngrok.io  
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://ec2d0d13fccb.ngrok.io 
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -83,23 +83,12 @@ def index():
             updateId = msg["update_id"]
             chatId = msg["message"]["chat"]["id"]
             Text = msg["message"]["text"]
-            
-            # concat_data = [updateId, chatId, Text]
-            # # send concatenated list to generate_chat method for generating dict.
-            # postChatBody = generate_chat(concat_data)
-            # print(postChatBody)
-            # url = "https://covid-bot-cms.herokuapp.com"
-            # res = post_chat(endpoint='/Chat-infos', body=postChatBody, url=url)
-            # print(res)
-            
-            # config.txt = Text
-            # config.chat_id = chatId
+            print(chatId)
             
             # process these text 
-            # reply = main(updateId)
             reply = main(chatId, Text)
 
-            send_message(chatId, text=reply)
+            send_message(chat_id=chatId, text=reply)
             # send_message(chatId)
         
             return Response('ok', status=200)
