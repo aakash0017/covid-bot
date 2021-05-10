@@ -8,8 +8,6 @@ from utility._utility import process_needhelp_input, process_needhelp_result, ne
 from user_utility.user_utility import validate_email, validate_mobile, check_plasma, save_details, load_file, after_bg_save, create_empty_dict
 from cms_queries.queries import get_request, post_request, get_chat
 
-
-
 def main(chat_id, txt):
 
     print(txt, chat_id)
@@ -26,22 +24,25 @@ def main(chat_id, txt):
     # txt = user_data["message"]["text"]
     
     # unique filename for refrencing to dictionary
-    file_name = 'data/user_objects_data/{}.npy'.format(chat_id)
-    if path.exists(file_name):
-        pass
-    else:
-        create_empty_dict(chat_id)
+    # file_name = 'data/user_objects_data/{}.npy'.format(chat_id)
+    # if path.exists(file_name):
+    #     pass
+    # else:
+    #     create_empty_dict(chat_id)
+    
+    # donot create a file 
     
     Reply_from_regex = regex_checker(txt)
     if Reply_from_regex == '1':
         print("contributor")
         
-        reload_dict = array2dict(load_file(file_name))
+        url = "https://covid-bot-cms.herokuapp.com"
+        res = get_object(endpoint='/Beta-objects', chat_id=chat_id, url=url)
         reload_chat_id = reload_dict[1]["chat_id"]
         reload_has_plasma = reload_dict[1]["has_plasma"]
         # print(reload_dict)
     
-        if reload_chat_id == chat_id and reload_has_plasma:
+        if reload_has_plasma:
             # new user object 
             user_object_Reload = user(reload_dict[1]["Name"], reload_dict[1]["Email"], reload_dict[1]["Mobile"])
             user_object_Reload.update_attributes('state', reload_dict[1]["State"])
