@@ -29,7 +29,7 @@ def write_json(data, filename='response.json'):
 
 def send_message(chat_id, text='abc'):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {'chat_id': chat_id, 'text': text, 'parse_mode': "Markdown"}
+    payload = {'chat_id': chat_id, 'text': text, 'parse_mode': "HTML"}
 
     r = requests.post(url, json=payload)
     return r
