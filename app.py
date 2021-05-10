@@ -69,8 +69,8 @@ def index():
             elif txt == '/needhelp':
                 print("Start block")
                 # load variables
-                msg0 = need_help()
-                msg1 = send_needhelp_reslist_msg()
+                msg0 = send_needhelp_reslist_msg()
+                msg1 = need_help()
                 send_message(msg["message"]["chat"]["id"], msg0)
                 send_message(msg["message"]["chat"]["id"], msg1)
                 return Response('ok', status=200)
