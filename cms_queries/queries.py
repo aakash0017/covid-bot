@@ -15,7 +15,7 @@ def get_request(resource, endpoint, city = '', state = '', environment  = 'local
                     _list.append([i['Name'], i['City'], i['State'], i['Mobile'], i['Resources'], i['Description'], i['published_at']])
 
     if len(_list) == 0:
-        return('Currenntly we do not have the resources please try again later')
+        return('raise flag')
     else: 
         _list
         return _list

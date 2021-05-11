@@ -2,9 +2,10 @@ from flask import Flask, request
 from flask import Response
 import requests
 import json
+from user_utility.user_utility import save_details_app
 from utility._utility import send_resource_message, send_needhelp_reslist_msg, generate_chat
 from data.message import contribute, start, need_help, enter_correct_det
-from cms_queries.queries import post_request
+from cms_queries.queries import post_request, get_object
 from main import main
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ user_flag = None
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/getMe
 # https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/sendMessage?chat_id=1721282209&text=Hello user 
 
-# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://6d441938903a.ngrok.io 
+# https://api.telegram.org/bot1797642990:AAH99XDMXSBycc2V3klWUHGG0Cn9-0EAEKE/setWebhook?url=https://9795e3cac664.ngrok.io 
 
 # TODO BOT
 # 1. Locally create a basic Flask application
@@ -61,8 +62,8 @@ def index():
             if txt == '/contribute':
                 print("Start block")
                 # load variables
-                msg0 = contribute()
-                msg1 = send_resource_message()
+                msg0 = send_resource_message()
+                msg1 = contribute()
                 send_message(msg["message"]["chat"]["id"], msg0)
                 send_message(msg["message"]["chat"]["id"], msg1)
                 return Response('ok', status=200)
@@ -85,7 +86,17 @@ def index():
             Text = msg["message"]["text"]
             print(chatId)
             print(type(chatId))
-            # process these text 
+            # process these text
+            
+            # doing something fishy here...
+            url = "https://covid-bot-cms.herokuapp.com/"
+            chat_id = str(chatId)
+            reload_dict = get_object(endpoint='Beta-objects', chat_id=chat_id, url=url)
+            if not reload_dict:
+                dict_ = {'Name': '', 'Mobile': '', 'Email': '', 'City': '', 'State': '', 'Resources': '', 'Description': ''}
+                save_details_app(dict_, chatId, False)
+            
+             
             send_message(chat_id=chatId, text="Stand By...")
             reply = main(chatId, Text)
 

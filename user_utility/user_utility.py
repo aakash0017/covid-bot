@@ -71,6 +71,16 @@ def save_details(details_dict, chat_id, hasplasma_Flag):
     print(res)
     return res
     
+def save_details_app(details_dict, chat_id, hasplasma_Flag):
+    details_dict['chat_id'] = chat_id
+    details_dict['has_plasma'] = hasplasma_Flag
+    print("67", details_dict)
+    dict_body = def_dict_2_post_mapping(details_dict)
+    url = 'https://covid-bot-cms.herokuapp.com'
+    res = post_request(endpoint='/Beta-objects', body=dict_body, url=url)
+    print(res)
+    return res
+    
     
 def after_bg_save(details_dict, chat_id, hasplasma_Flag=False):
     details_dict['chat_id'] = chat_id

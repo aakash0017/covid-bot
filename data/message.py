@@ -10,7 +10,8 @@ def contribute():
     Please enter resources by their serial numbers provided above for mutliple resources enter them in space seprated form.\n\n<i>E.g. <b>1 2 for plasma and Remdesvir.</b></i>
     
 Enter details in given format:
-your-nameyour-email
+your-name
+your-email
 mobile no.
 city 
 state

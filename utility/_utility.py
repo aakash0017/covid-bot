@@ -10,7 +10,6 @@ import re
 
 def take_input(user_input, input_type):
     user_input = user_input.lower()
-    # handle input_type = 'int'
     processed_input = check_validity(user_input, input_type)
     return processed_input
 
@@ -19,7 +18,7 @@ def check_validity(user_input, input_type):
     sim_input, status = most_similar(user_input, input_type)
     if status == True:
         # possible_inputs = handle_invalid_input(user_input, input_type)
-        return [status, '']
+        return 'True'
     else:
         return sim_input
 
@@ -72,19 +71,24 @@ def most_similar(user_input, input_type):
 def load_cities():
     return np.load('data/cities.npy', allow_pickle=True)
 
-def load_resources():
-    return np.load('data/res.npy', allow_pickle=True)
+def load_resources(filename):
+    return np.load(filename, allow_pickle=True)
 
 def load_states():
     return np.load('data/states.npy', allow_pickle=True)
 
 # load resources and apply mapping from idx -> resource names
-def idx_2_res():
-    res = load_resources()
+def idx_2_res(St = 0):
+    res = []
+    if St == 1:
+        res = load_resources('data/resource.npy')
+    else:
+        res = load_resources('data/res.npy')
     idx_2_res = dict()
     for idx, res in enumerate(res):
         idx_2_res[idx] = res
     return idx_2_res
+
 
 # split input resources into list
 def res_spliter(inp_res):
@@ -115,7 +119,7 @@ def array2dict(array):
 
 def send_resource_message():
     tmp_string = ""
-    for key, value in idx_2_res().items():
+    for key, value in idx_2_res(St=1).items():
         tmp_string = tmp_string + "{0:<10} {1}".format(key, value) + "\n"
 
     result = """Resource List: \n{} """.format(tmp_string)
@@ -180,6 +184,7 @@ def send_needhelp_reslist_msg():
 def process_needhelp_result(get_Result_list):
     # convert the get_Request list to extract name and mobile only.
     # temp_list = []
+    print(get_Result_list)
     temp_list = [[i[0].lower(), i[3]] for i in get_Result_list]
     # main sorted list 
     result_list = list(set(map(lambda i: tuple(sorted(i)), temp_list)))
