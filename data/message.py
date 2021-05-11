@@ -1,31 +1,30 @@
 def start():
     tmp_str = """
-    For contribution enter /contribute whereas for help enter /needhelp
+    if want to contribute please type <b>/contribute</b> and if you are looking for resources please type <b>/needhelp</b>
     """
     return tmp_str
 
 def contribute():
     # attach resource list below this.
     tmp_str = """
-    Enter details in below given format:
-    name
-    email
-    mobile no.
-    city 
-    state
-    resources
-    description ('') 
-
-    Note: pls enter resources by their serial no's provided below 
-    for mutliple resources enter them in space seprated form.
-    e.g. 1 2 for plasma and Remdesvir..
+    Please enter resources by their serial numbers provided above for mutliple resources enter them in space seprated form.\n\n<i>E.g. <b>1 2 for plasma and Remdesvir.</b></i>
+    
+Enter details in given format:
+your-name
+your-email
+mobile no.
+city 
+state
+resources-available
+description
     """
     return tmp_str
 
 def need_help():
     tmp_str = """
-    Enter details in below given format:\nResource in City or state\nNote: pls enter resource by their serial no's provided below.
+    Enter details in the following format using the serial number provided above. \nyou can only check for one resource at a time. \n\n<i>E.g. <b>1 in Delhi</b></i>
     """
+    
     return tmp_str
 
 def enter_correct_det():

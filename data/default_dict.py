@@ -9,3 +9,11 @@ def default_dict():
         'Description': ''
     }   
     return dict_
+
+def default_chat_dict():
+    dict_ = {
+        'updateID': '',
+        'chatID': '',
+        'Text': ''
+    }
+    return dict_
